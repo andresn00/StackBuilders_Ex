@@ -5,8 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Alert } from 'react-bootstrap'
 
 import moment from 'moment'
+
 import PlateForm from './Components/PlateForm';
 import {carCanGoOut as _carCanGoOut} from './utils'
+import {timeFormat, dateFormat} from './Config'
 
 function App() {
   const [showAlert, setShowAlert] = useState(false)
@@ -14,8 +16,8 @@ function App() {
 
   const handlePredictPicoYPlaca = (plateNumber, dateTime) => {
     const mom = moment(dateTime)
-    const date = mom.format('DD-MM-YYYY')
-    const time = mom.format('hh:mm A')
+    const date = mom.format(dateFormat)
+    const time = mom.format(timeFormat)
 
     setShowAlert(true)
     setCarCanGoOut(_carCanGoOut(plateNumber, date, time))

@@ -11,12 +11,9 @@ export default class Plate {
     }
 
     validatePlateNumber = () => {
-        if (this.invalidFirstLetters.indexOf(parseInt(this.plateNumber[0])) !== -1) {
+        if (this.invalidFirstLetters.includes(this.plateNumber[0])) {
             return false
         }
-        if (this.regEx.test(this.plateNumber)) {
-            return true
-        }
-        return false
+        return this.regEx.test(this.plateNumber)
     }
 }
