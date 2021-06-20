@@ -1,9 +1,11 @@
 import moment from 'moment'
-import config from './Config'
+import { config, dateFormat, timeFormat } from './Config'
 
 export const CarCanGoOut = (plateNumber, date, time) => {
     // date -> weekday
-    const weekDay = moment(date).format('dddd')
+    console.log('dateUtils', date);
+    const weekDay = moment(date, dateFormat).format('dddd')
+    console.log('weekDay', weekDay);
     const weekDayArr = config.lastDigitsPerDay[weekDay]
 
     // last digit of plate
@@ -16,11 +18,10 @@ export const CarCanGoOut = (plateNumber, date, time) => {
 
     // time isBetween() each hour
     const nonPermitedHours = config.nonPermitedHours
-    const format = 'hh:mm A'
     for (let i = 0; i < nonPermitedHours.length; i++) {
-        const startHour = moment(nonPermitedHours[i].start, format)
-        const endHour =  moment(nonPermitedHours[i].end, format)
-        const res = moment(time, format).isBetween(startHour, endHour, undefined, [])
+        const startHour = moment(nonPermitedHours[i].start, timeFormat)
+        const endHour =  moment(nonPermitedHours[i].end, timeFormat)
+        const res = moment(time, timeFormat).isBetween(startHour, endHour, undefined, [])
         if (res) {
             return false
         }

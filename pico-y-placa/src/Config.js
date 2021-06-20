@@ -1,6 +1,5 @@
-import moment from 'moment'
-
-const format = 'hh:mm A'
+export const timeFormat = 'hh:mm A'
+export const dateFormat = 'DD-MM-YYYY'
 
 export const config = {
     nonPermitedHours: [
