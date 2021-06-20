@@ -1,7 +1,13 @@
 import moment from 'moment'
+import Plate from './Plate'
 import { config, dateFormat, timeFormat } from './Config'
 
 export const carCanGoOut = (plateNumber, date, time) => {
+    const plate = new Plate(plateNumber)
+    if (!plate.validatePlateNumber()) {
+        return false
+    }
+
     const weekDay = moment(date, dateFormat).format('dddd')
     const weekDayPlates = config.lastDigitsPerDay[weekDay]
 
