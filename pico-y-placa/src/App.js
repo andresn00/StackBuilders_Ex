@@ -6,28 +6,26 @@ import { Alert } from 'react-bootstrap'
 
 import moment from 'moment'
 import PlateForm from './Components/PlateForm';
-import {CarCanGoOut} from './utils'
+import {carCanGoOut as _carCanGoOut} from './utils'
 
 function App() {
-  const [showAlert, setShowAlert] = useState(true)
+  const [showAlert, setShowAlert] = useState(false)
   const [carCanGoOut, setCarCanGoOut] = useState(false)
 
-  const HandlePredictPicoYPlaca = (plateNumber, dateTime) => {
+  const handlePredictPicoYPlaca = (plateNumber, dateTime) => {
     const mom = moment(dateTime)
     const date = mom.format('DD-MM-YYYY')
     const time = mom.format('hh:mm A')
-    console.log('date', date)
-    console.log('time', time)
 
     setShowAlert(true)
-    setCarCanGoOut(CarCanGoOut(plateNumber, date, time))
+    setCarCanGoOut(_carCanGoOut(plateNumber, date, time))
   }
 
   return (
     <div className="m-4">
       <h1>Pico y Placa Predictor</h1><hr />
       <div className='mt-3'>
-        <PlateForm onClick={HandlePredictPicoYPlaca} />
+        <PlateForm onSubmit={handlePredictPicoYPlaca} setShowAlert={setShowAlert} />
 
         {showAlert ? 
           <Alert className='mt-4' variant={carCanGoOut ? 'success' : 'danger'}>
