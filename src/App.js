@@ -24,7 +24,7 @@ function App() {
   }
 
   return (
-    <div className="m-4">
+    <div className="m-4 border rounded p-4">
       <h1>Pico y Placa Predictor</h1><hr />
       <div className='mt-3'>
         <PlateForm onSubmit={handlePredictPicoYPlaca} setShowAlert={setShowAlert} />
