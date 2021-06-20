@@ -11,7 +11,7 @@ export default class Plate {
     }
 
     validatePlateNumber = () => {
-        if (this.invalidFirstLetters.includes(this.plateNumber[0])) {
+        if (this.invalidFirstLetters.includes(this.plateNumber[0]?.toLowerCase())) {
             return false
         }
         return this.regEx.test(this.plateNumber)

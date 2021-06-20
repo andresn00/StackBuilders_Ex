@@ -23,7 +23,9 @@ const PlateForm = (props) => {
                     <Col sm={2}>
                         <Form.Group controlId='formPlate'>
                             <Form.Label>Plate Number</Form.Label>
-                            <Form.Control value={plateNumber} onChange={handlePlateNumberChange} />
+                            <Form.Control value={plateNumber} onChange={handlePlateNumberChange}
+                                isInvalid={plateNumber && !plateIsValid} />
+                            <Form.Control.Feedback type='invalid' >Invalid plate number</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                     <Col sm={2}>

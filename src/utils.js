@@ -4,11 +4,19 @@ import { config, dateFormat, timeFormat } from './Config'
 
 export const carCanGoOut = (plateNumber, date, time) => {
     const plate = new Plate(plateNumber)
+    const _date = moment(date, dateFormat, true)
+    const _time = moment(time, timeFormat, true)
     if (!plate.validatePlateNumber()) {
         return false
     }
+    if (!_date.isValid()) {
+        return false
+    }
+    if (!_time.isValid()) {
+        return false
+    }
 
-    const weekDay = moment(date, dateFormat).format('dddd')
+    const weekDay = _date.format('dddd')
     const weekDayPlates = config.lastDigitsPerDay[weekDay]
 
     const lastDigit = parseInt(plateNumber[plateNumber.length - 1])
@@ -20,7 +28,7 @@ export const carCanGoOut = (plateNumber, date, time) => {
     for (let i = 0; i < nonPermitedHours.length; i++) {
         const startHour = moment(nonPermitedHours[i].start, timeFormat)
         const endHour =  moment(nonPermitedHours[i].end, timeFormat)
-        const isBetween = moment(time, timeFormat).isBetween(startHour, endHour, undefined, [])
+        const isBetween = _time.isBetween(startHour, endHour, undefined, [])
         if (isBetween) {
             return false
         }

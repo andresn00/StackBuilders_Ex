@@ -17,3 +17,9 @@ test('should return true for a valid plate without hyphen', () => {
     const isValid = plate.validatePlateNumber()
     expect(isValid).toBe(true);
 });
+
+test('should return false for a plate with invalid first letter', () => {
+    const plate = new Plate('DCI8865')
+    const isValid = plate.validatePlateNumber()
+    expect(isValid).toBe(false);
+});
